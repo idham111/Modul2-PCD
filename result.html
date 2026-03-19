@@ -1,0 +1,97 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Unggah Citra Digital untuk Operasi yang Tersedia</h2>
+  <form action="/upload/" enctype="multipart/form-data" method="post" class="mt-4">
+    <div class="mb-3">
+      <input name="file" type="file" accept="image/*" class="form-control" required />
+    </div>
+    <div class="text-center">
+      <input type="submit" value="Upload" class="btn btn-primary" />
+    </div>
+  </form>
+
+  <h2 class="text-center mt-5">Operasi Aritmatika pada Citra</h2>
+  <form action="/operation/" enctype="multipart/form-data" method="post" class="mt-4">
+    <div class="mb-3">
+      <label>Pilih Gambar:</label>
+      <input name="file" type="file" accept="image/*" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label>Pilih Operasi:</label>
+      <select name="operation" class="form-select" required>
+        <option value="add">Tambah</option>
+        <option value="subtract">Kurang</option>
+        <option value="max">Max</option>
+        <option value="min">Min</option>
+        <option value="inverse">Inverse</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label>Nilai Operasi (Range):</label>
+      <input type="range" class="form-range" min="0" max="100" step="1" name="value" id="value" value="50" />
+      <output id="valueOutput" class="form-text">50</output>
+    </div>
+    <div class="text-center">
+      <input type="submit" value="Lakukan Operasi" class="btn btn-primary" />
+    </div>
+  </form>
+
+  <h2 class="text-center mt-5">Operasi Logika pada Citra</h2>
+  <form action="/logic_operation/" enctype="multipart/form-data" method="post" class="mt-4">
+    <div class="mb-3">
+      <label>Pilih Gambar 1:</label>
+      <input name="file1" type="file" accept="image/*" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label>Pilih Gambar 2 (Untuk operasi AND dan XOR):</label>
+      <input id="logicFile2" name="file2" type="file" accept="image/*" class="form-control" />
+      <div id="logicHint" class="form-text text-muted">Opsional untuk NOT, wajib untuk AND/XOR.</div>
+    </div>
+    <div class="mb-3">
+      <label>Pilih Operasi:</label>
+      <select id="logicOperation" name="operation" class="form-select" required>
+        <option value="not">NOT</option>
+        <option value="and">AND</option>
+        <option value="xor">XOR</option>
+      </select>
+    </div>
+    <div class="text-center">
+      <input type="submit" value="Lakukan Operasi Logika" class="btn btn-primary" />
+    </div>
+  </form>
+
+  <h2 class="text-center mt-5">Statistik Citra</h2>
+  <form action="/statistics/" enctype="multipart/form-data" method="post" class="mt-4">
+    <div class="mb-3">
+      <label>Pilih Gambar:</label>
+      <input name="file" type="file" accept="image/*" class="form-control" required />
+    </div>
+    <div class="text-center">
+      <input type="submit" value="Hitung Statistik" class="btn btn-primary" />
+    </div>
+  </form>
+
+  <script>
+    const slider = document.getElementById("value");
+    const output = document.getElementById("valueOutput");
+    slider.addEventListener("input", function () {
+      output.textContent = slider.value;
+    });
+
+    const logicOperation = document.getElementById("logicOperation");
+    const logicFile2 = document.getElementById("logicFile2");
+    const logicHint = document.getElementById("logicHint");
+
+    function updateLogicSecondImageRequirement() {
+      const requiresSecondImage = logicOperation.value === "and" || logicOperation.value === "xor";
+      logicFile2.required = requiresSecondImage;
+      logicHint.textContent = requiresSecondImage
+        ? "Untuk AND/XOR, pilih gambar kedua dan pastikan ukurannya sama dengan gambar pertama."
+        : "Untuk NOT, gambar kedua tidak diperlukan.";
+    }
+
+    logicOperation.addEventListener("change", updateLogicSecondImageRequirement);
+    updateLogicSecondImageRequirement();
+  </script>
+</div>
+{% endblock %}

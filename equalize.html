@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}JTK PCD 2024 - idham khalid - 241511046{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      :root {
+        --bg-main: #0a0a0a;
+        --bg-sidebar: #111111;
+        --bg-input: #1a1a2e;
+        --accent-primary: #7b2fbe;
+        --accent-glow: #bf5fff;
+        --accent-electric: #00bfff;
+        --text-main: #f0f0ff;
+        --danger-active: #c0392b;
+      }
+
+      body {
+        color: var(--text-main);
+        background-color: var(--bg-main);
+        background-image:
+          radial-gradient(circle at 12% 8%, rgba(123, 47, 190, 0.22), transparent 38%),
+          radial-gradient(circle at 84% 22%, rgba(0, 191, 255, 0.08), transparent 32%),
+          radial-gradient(circle at 50% 85%, rgba(191, 95, 255, 0.1), transparent 40%);
+      }
+
+      .navbar.navbar-expand-lg.navbar-dark.bg-primary {
+        background: #0a0a0a !important;
+        border-bottom: 1px solid rgba(191, 95, 255, 0.65);
+        box-shadow: 0 1px 0 rgba(191, 95, 255, 0.45), 0 0 16px rgba(191, 95, 255, 0.35);
+      }
+
+      .navbar-brand {
+        color: var(--text-main) !important;
+        text-shadow: 0 0 8px rgba(191, 95, 255, 0.85), 0 0 20px rgba(0, 191, 255, 0.35);
+        letter-spacing: 0.04em;
+        animation: electricPulse 3s ease-in-out infinite;
+      }
+
+      @keyframes electricPulse {
+        0%,
+        100% {
+          text-shadow: 0 0 8px rgba(191, 95, 255, 0.75), 0 0 18px rgba(0, 191, 255, 0.35);
+          filter: brightness(1);
+        }
+
+        50% {
+          text-shadow: 0 0 10px rgba(191, 95, 255, 1), 0 0 28px rgba(0, 191, 255, 0.65), 0 0 3px rgba(255, 255, 255, 0.9);
+          filter: brightness(1.12);
+        }
+      }
+
+      .sidebar {
+        background: var(--bg-sidebar) !important;
+        border-right: 1px solid rgba(123, 47, 190, 0.4);
+        box-shadow: inset -1px 0 0 rgba(191, 95, 255, 0.22), 0 0 24px rgba(0, 0, 0, 0.45);
+        min-height: calc(100vh - 56px);
+      }
+
+      .sidebar .nav-link {
+        color: rgba(240, 240, 255, 0.86);
+        border-radius: 0.5rem;
+        margin: 0.25rem 0.6rem;
+        padding: 0.5rem 0.75rem;
+        transition: all 0.2s ease;
+      }
+
+      .sidebar .nav-link:hover,
+      .sidebar .nav-link.active {
+        color: #ffffff;
+        background: linear-gradient(90deg, rgba(123, 47, 190, 0.28), rgba(0, 191, 255, 0.14));
+        box-shadow: 0 0 10px rgba(191, 95, 255, 0.45), inset 0 0 8px rgba(123, 47, 190, 0.35);
+        text-shadow: 0 0 8px rgba(191, 95, 255, 0.6);
+      }
+
+      h2 {
+        color: var(--text-main);
+        text-shadow: 0 0 8px rgba(191, 95, 255, 0.7), 0 0 20px rgba(123, 47, 190, 0.35);
+      }
+
+      .btn-primary,
+      input.btn.btn-primary,
+      button.btn.btn-primary {
+        border: 0;
+        color: #f7f5ff;
+        background: linear-gradient(135deg, #7b2fbe 0%, #bf5fff 62%, #7b2fbe 100%);
+        box-shadow: 0 0 8px rgba(191, 95, 255, 0.35), 0 0 0 rgba(0, 191, 255, 0);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-primary:active {
+        color: #ffffff;
+        background: linear-gradient(135deg, #8f38d8 0%, #bf5fff 50%, #5f6dff 100%);
+        box-shadow: 0 0 10px rgba(191, 95, 255, 0.65), 0 0 22px rgba(0, 191, 255, 0.55);
+      }
+
+      .btn-primary:focus {
+        outline: none;
+      }
+
+      .btn-primary:focus-visible {
+        box-shadow: 0 0 0 0.2rem rgba(191, 95, 255, 0.38), 0 0 20px rgba(0, 191, 255, 0.5);
+      }
+
+      .form-control,
+      .form-select,
+      .form-range {
+        background-color: var(--bg-input);
+        border-color: rgba(123, 47, 190, 0.65);
+        color: var(--text-main);
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        background-color: #1f1f3a;
+        color: #ffffff;
+        border-color: var(--accent-glow);
+        box-shadow: 0 0 0 0.2rem rgba(191, 95, 255, 0.22), 0 0 14px rgba(0, 191, 255, 0.3);
+      }
+
+      .form-control::file-selector-button {
+        color: #f7f7ff;
+        background: linear-gradient(135deg, rgba(123, 47, 190, 0.75), rgba(0, 191, 255, 0.55));
+        border: 0;
+      }
+
+      .form-control::placeholder {
+        color: rgba(240, 240, 255, 0.55);
+      }
+
+      .container,
+      .container-fluid,
+      main.col-md-9 {
+        background: transparent;
+      }
+
+      .row > [class*="col-"] > .text-center,
+      .container.mt-5,
+      form.mt-4,
+      .card {
+        border: 1px solid rgba(123, 47, 190, 0.35);
+        background: rgba(18, 18, 24, 0.66);
+        box-shadow: 0 0 24px rgba(123, 47, 190, 0.17), inset 0 0 0 1px rgba(191, 95, 255, 0.08);
+        border-radius: 0.85rem;
+      }
+
+      .text-danger,
+      .btn-danger {
+        color: #ffd9d6 !important;
+        background-color: var(--danger-active) !important;
+        border-color: var(--danger-active) !important;
+      }
+
+      .form-text,
+      label,
+      h4,
+      p,
+      li,
+      a {
+        color: var(--text-main);
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">JTK PCD 2024 - idham khalid - 241511046</a>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+          <div class="position-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/grayscale/">Grayscale</a></li>
+              <li class="nav-item"><a class="nav-link" href="/histogram/">Histogram</a></li>
+              <li class="nav-item"><a class="nav-link" href="/equalize/">Histogram Equalization</a></li>
+              <li class="nav-item"><a class="nav-link" href="/specify/">Histogram Specification</a></li>
+            </ul>
+          </div>
+        </nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          {% block content %}{% endblock %}
+        </main>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
